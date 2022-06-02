@@ -10,6 +10,11 @@ class Loan {
     }
 
     display() {
-        return `Loan Amount: $${this.amount}\nInterest Rate: ${this.interestRate * 100}%\nLength of Loan in Months: ${this.loanLength} months\nMonthly Payment Amount: $${this.monthlyPayment}/month`
+        return `Loan Amount: $${this.amount}\n
+                Interest Rate: ${this.interestRate * 100}%\n
+                Length of Loan in Months: ${this.loanLength} months\n
+                Monthly Payment Amount: $${this.monthlyPayment}/month`
     }
 }
+
+module.exports = Loan
