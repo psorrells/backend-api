@@ -20,7 +20,7 @@ router.get('/update', (req,res) => {
 })
 //get form for new and update
 router.get('/create', async (req,res) => {
-    let id = req.body.id
+    let id = req.body.id || req.query.id
 
     let userLoan = await getLoan(id)
     
@@ -47,7 +47,13 @@ router.post('/create', async (req,res) => {
         if(!loanID) {
             loanID = await db.getDb().collection('Loans').insertOne(newLoan)
         } else {
-            await db.getDb().collection('Loans').updateOne({"_id" : loanID}, newLoan)
+            //setting loan ID here to return the same construction as loanID above from database.
+            loanID = { insertedId: ObjectId(loanID)},
+            await db.getDb().collection('Loans').updateOne(
+                {"_id" : loanID.insertedId}, 
+                { $set: newLoan },
+                { upsert: true })
+
         }
     
         console.log(`Success! Loan has been added.`)

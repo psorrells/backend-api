@@ -22,7 +22,7 @@
             <input type="text" id="loanLength" name="loanLength" value="<%= loan.loanLength || '' %>">
             <label>Monthly Payment</label>
             <input type="text" id="monthlyPayment" name="monthlyPayment" value="<%= loan.monthlyPayment || '' %>">
-			<div id="loanID" value="<%= loan._id || '' %>"></div> 
+			<input style="display: none" id="loanID" name="id" value="<%= loan._id || '' %>">
             <button id="submit">Save Loan</button>
         </form>
 		<script type="text/javascript" src="js/main.js"></script>
