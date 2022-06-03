@@ -4,19 +4,28 @@ const { route } = require('express/lib/application')
 const Loan = require('../models/loan')
 const router = express.Router()
 const db = require('../config/databaseConfig')
+const { ObjectId } = require('bson')
+const ObjectID = require("mongodb").ObjectID;
 
 
 //all these routes begin with loan
 
 //CREATE A NEW LOAN, UPDATE A LOAN
+//get form
 router.get('/create', async (req,res) => {
     let id = req.query.id
 
     let userLoan = await getLoan(id)
+    
+    //if we didn't receive a loan, set the values to null to send to the form
+    if (!userLoan) {
+        userLoan = new Loan(null,null,null,null)
+    }
 
     res.render('createEditLoan', { 'loan': userLoan })
 })
 
+//post to database
 router.post('/create', async (req,res) => {
     let amount = req.body.amount
     let interestRate = req.body.interestRate
@@ -30,7 +39,6 @@ router.post('/create', async (req,res) => {
 
         if(!loanID) {
             loanID = await db.getDb().collection('Loans').insertOne(newLoan)
-            loanID = await loanID.insertedID.str
         } else {
             await db.getDb().collection('Loans').updateOne({"_id" : loanID}, newLoan)
         }
@@ -45,10 +53,11 @@ router.post('/create', async (req,res) => {
 //RETRIEVE A LOAN
 router.get('/view', async (req,res) => {
     let id = req.query.id
+    console.log(id)
 
     let userLoan = await getLoan(id)
 
-    if (!userLoan) res.status(404)
+    if (!await userLoan) res.status(404).write('Error: Loan not does not exist')
 
     res.render('viewLoan', { loan: userLoan})
 })
@@ -57,9 +66,11 @@ router.get('/view', async (req,res) => {
 async function getLoan(id = null) {
     if (id === null) return null
     try {
-        let userLoan = await db.getDb().collection('Loans').findOne({"_id" : id})
+        let userLoan = await db.getDb().collection('Loans').findOne({"_id": ObjectId(id)})
         return userLoan
     } catch(err) {
         console.log(err)
     }
 }
+
+module.exports = router

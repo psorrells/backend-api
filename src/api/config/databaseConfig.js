@@ -2,12 +2,13 @@
 const { MongoClient } = require("mongodb");
 const { connected } = require("process");
 const connectionString = process.env.ATLAS_URI;
-const client = new MongoClient(connectionString);
 
 let dbConnection;
 
 //Create a connection to the database
 const connectToServer = async () => {
+    const client = new MongoClient(connectionString);
+
     try {
         await client.connect();
         dbConnection = client.db('LoanStreet');
