@@ -13,8 +13,11 @@
 	</head>
 	<body>
 		<h1>Your Loan</h1>
-        <p><%= loan.display() %></p>
-        <button>Update This Loan</button>
+        <p>Loan Amount: $<%= loan.amount %></p>
+        <p>Interest Rate: <%= loan.interestRate * 100 %>%</p>
+        <p>Length of Loan: <%= loan.loanLength %> months</p>
+        <p>Payment: <%= loan.monthlyPayment %>/month</p>
+        <button id="update">Update This Loan</button>
         <button id="home">Home</button>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
