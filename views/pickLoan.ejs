@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+		<title>Loan Creator</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<p>Please type or paste in the id of the loan you would like to <%= action %>.</p>
+        <form action="<%= route %>/" method="POST">
+            <input type="text" id="id" name="id">
+            <button type="submit" id="submit">Get Loan</button>
+        </form>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

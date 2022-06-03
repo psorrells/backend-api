@@ -11,9 +11,16 @@ const ObjectID = require("mongodb").ObjectID;
 //all these routes begin with loan
 
 //CREATE A NEW LOAN, UPDATE A LOAN
-//get form
+//get form to request loan ID for update
+router.get('/update', (req,res) => {
+    res.render('pickLoan', { 
+        action: 'update',
+        route: 'create'
+    })
+})
+//get form for new and update
 router.get('/create', async (req,res) => {
-    let id = req.query.id
+    let id = req.body.id
 
     let userLoan = await getLoan(id)
     
@@ -53,9 +60,15 @@ router.post('/create', async (req,res) => {
 })
 
 //RETRIEVE A LOAN
-router.get('/view', async (req,res) => {
-    let id = req.query.id
-    console.log(id)
+router.get('/view/', (req,res) => {
+    res.render('pickLoan', { 
+        action: 'view',
+        route: 'view'
+    })
+})
+
+router.post('/view/', async (req,res) => {
+    let id = req.body.id
 
     let userLoan = await getLoan(id)
 
