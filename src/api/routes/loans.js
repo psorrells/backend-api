@@ -9,6 +9,14 @@ const db = require('../config/databaseConfig')
 //all these routes begin with loan
 
 //CREATE A NEW LOAN, UPDATE A LOAN
+router.get('/create', async (req,res) => {
+    let id = req.query.id
+
+    let userLoan = await getLoan(id)
+
+    res.render('createEditLoan', { 'loan': userLoan })
+})
+
 router.post('/create', async (req,res) => {
     let amount = req.body.amount
     let interestRate = req.body.interestRate
@@ -38,14 +46,20 @@ router.post('/create', async (req,res) => {
 router.get('/view', async (req,res) => {
     let id = req.query.id
 
+    let userLoan = await getLoan(id)
+
+    if (!userLoan) res.status(404)
+
+    res.render('viewLoan', { loan: userLoan})
+})
+
+
+async function getLoan(id = null) {
+    if (id === null) return null
     try {
         let userLoan = await db.getDb().collection('Loans').findOne({"_id" : id})
-    
-        res.render('loan/view', {
-            loan : userLoan
-          })
+        return userLoan
     } catch(err) {
         console.log(err)
     }
-
-})
+}

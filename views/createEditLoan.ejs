@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<h1>Create Loan</h1>
-        <form action="<%= form.path %>" method="<%= form.type %>" id="create-edit">
+        <form action="loan/create" method="POST" id="create-edit">
             <label>Loan Amount</label>
             <text id="amount" name="amount" value="<%= form.loan.amount || '' %>"></text>
             <label>Interest Rate</label>
