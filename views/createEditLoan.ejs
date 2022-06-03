@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+		<title>Loan Creator</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<h1>Create Loan</h1>
+        <form action="loan/create" method="POST" id="create-edit">
+            <label>Loan Amount</label>
+            <text id="amount" name="amount" value="<%= loan.amount || '' %>"></text>
+            <label>Interest Rate</label>
+            <text id="amount" name="amount" value="<%= loan.interestRate || '' %>"></text>
+            <label>Length of Loan in Months</label>
+            <text id="amount" name="amount" value="<%= loan.loanLength || '' %>"></text>
+            <label>Monthly Payment</label>
+            <text id="amount" name="amount" value="<%= loan.monthlyPayment || '' %>"></text>
+            <button type="submit" id="submit">Save Loan</button>
+        </form>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>
