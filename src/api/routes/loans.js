@@ -8,20 +8,24 @@ const db = require('../config/databaseConfig')
 
 //all these routes begin with loan
 
-//CREATE A NEW LOAN
+//CREATE A NEW LOAN, UPDATE A LOAN
 router.post('/create', async (req,res) => {
     let amount = req.body.amount
     let interestRate = req.body.interestRate
     let loanLength = req.body.loanLength
     let monthlyPayment = req.body.monthlyPayment
+    let loanID = req.body.id || null
 
     //add loan to database, return id
     try {    
         let newLoan = new Loan(amount, interestRate, loanLength, monthlyPayment)
-    
-        let loanID = await db.getDb().collection('Loans').insertOne(newLoan)
 
-        loanID = await loanID.insertedID.str
+        if(!loanID) {
+            loanID = await db.getDb().collection('Loans').insertOne(newLoan)
+            loanID = await loanID.insertedID.str
+        } else {
+            await db.getDb().collection('Loans').updateOne({"_id" : loanID}, newLoan)
+        }
     
         console.log(`Success! Loan has been added.`)
         res.json(loanID)
@@ -45,5 +49,3 @@ router.get('/view', async (req,res) => {
     }
 
 })
-
-//UPDATE A LOAN
