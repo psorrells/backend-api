@@ -11,4 +11,6 @@ app.use(express.static('public'))
 //return middleware for urlencoded bodies
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
+//we are using ejs to contol dynamic files
+app.set('view engine', 'ejs')
 

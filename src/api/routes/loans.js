@@ -1,4 +1,4 @@
-/* CRUD FOR LOANS */
+/* CRU(D) FOR LOANS */
 const express = require('express')
 const { route } = require('express/lib/application')
 const Loan = require('../models/loan')
@@ -7,6 +7,8 @@ const db = require('../config/databaseConfig')
 
 
 //all these routes begin with loan
+
+//CREATE A NEW LOAN
 router.post('/create', async (req,res) => {
     let amount = req.body.amount
     let interestRate = req.body.interestRate
@@ -25,6 +27,23 @@ router.post('/create', async (req,res) => {
         res.json(loanID)
     } catch(err) {
         console.log(err)
-        res.write(`Sorry, it seems there has been an error. We sincerely apologize and are working to fix it.`)
     }
 })
+
+//RETRIEVE A LOAN
+router.get('/view', async (req,res) => {
+    let id = req.query.id
+
+    try {
+        let userLoan = await db.getDb().collection('Loans').findOne({"_id" : id})
+    
+        res.render('loan/view', {
+            loan : userLoan
+          })
+    } catch(err) {
+        console.log(err)
+    }
+
+})
+
+//UPDATE A LOAN
