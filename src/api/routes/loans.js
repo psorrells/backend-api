@@ -44,7 +44,9 @@ router.post('/create', async (req,res) => {
         }
     
         console.log(`Success! Loan has been added.`)
-        res.json(loanID)
+        res.render('loanSuccess', {
+            loan: loanID
+        })
     } catch(err) {
         console.log(err)
     }

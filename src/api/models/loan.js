@@ -1,7 +1,7 @@
 /* LOAN CLASS */
 
 class Loan {
-    //Inputs are amount, interest rate, length of the loan in months, and monthly payment amount
+    //Inputs are amount, interest rate (as a decimal), length of the loan in months, and monthly payment amount
     constructor(amount, interestRate, loanLength, monthlyPayment) {
         this.amount = amount
         this.interestRate = interestRate

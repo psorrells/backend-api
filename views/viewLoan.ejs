@@ -17,8 +17,8 @@
         <p>Interest Rate: <%= loan.interestRate * 100 %>%</p>
         <p>Length of Loan: <%= loan.loanLength %> months</p>
         <p>Payment: $<%= loan.monthlyPayment %>/month</p>
-        <button id="update">Update This Loan</button>
-        <button id="home">Home</button>
+        <a id="update" href="/loan/create?id=<%= loan._id %>">Update This Loan</a>
+        <a id="home" href="/">Home</a>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
