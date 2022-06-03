@@ -14,13 +14,18 @@ const ObjectID = require("mongodb").ObjectID;
 //get form to request loan ID for update
 router.get('/update', (req,res) => {
     res.render('pickLoan', { 
-        action: 'update',
-        route: 'create'
+        action: 'update'
     })
 })
+//send user from update to create form
+router.post('/update', (req,res) => {
+    res.redirect(`/loan/create?id=${req.body.id}`)
+})
+
 //get form for new and update
 router.get('/create', async (req,res) => {
-    let id = req.body.id || req.query.id
+    let id = req.query.id
+    console.log(id)
 
     let userLoan = await getLoan(id)
     
@@ -68,8 +73,7 @@ router.post('/create', async (req,res) => {
 //RETRIEVE A LOAN
 router.get('/view/', (req,res) => {
     res.render('pickLoan', { 
-        action: 'view',
-        route: 'view'
+        action: 'view'
     })
 })
 
