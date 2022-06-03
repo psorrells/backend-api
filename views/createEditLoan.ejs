@@ -13,15 +13,15 @@
 	</head>
 	<body>
 		<h1>Create Loan</h1>
-        <form action="loan/create" method="POST" id="create-edit">
+        <form action="<%= form.path %>" method="<%= form.type %>" id="create-edit">
             <label>Loan Amount</label>
-            <text id="amount" name="amount" value="<%= loan.amount || '' %>"></text>
+            <text id="amount" name="amount" value="<%= form.loan.amount || '' %>"></text>
             <label>Interest Rate</label>
-            <text id="amount" name="amount" value="<%= loan.interestRate || '' %>"></text>
+            <text id="amount" name="amount" value="<%= form.loan.interestRate || '' %>"></text>
             <label>Length of Loan in Months</label>
-            <text id="amount" name="amount" value="<%= loan.loanLength || '' %>"></text>
+            <text id="amount" name="amount" value="<%= form.loan.loanLength || '' %>"></text>
             <label>Monthly Payment</label>
-            <text id="amount" name="amount" value="<%= loan.monthlyPayment || '' %>"></text>
+            <text id="amount" name="amount" value="<%= form.loan.monthlyPayment || '' %>"></text>
             <button type="submit" id="submit">Save Loan</button>
         </form>
 		<script type="text/javascript" src="js/main.js"></script>
